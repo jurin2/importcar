@@ -5808,41 +5808,8 @@ const vehicleCatalog = [
   }
 
   async function sendVisitLog() {
-    autojiniVisitSessionId = getOrCreateAutojiniVisitSessionId();
-
-    try {
-      if (sessionStorage.getItem(AUTOJINI_VISIT_LOGGED_KEY) === "true") {
-        return true;
-      }
-    } catch (error) {
-      console.warn("방문 로그 저장 여부를 읽지 못했습니다.", error);
-    }
-
-    const referrer = document.referrer || "";
-    const ipAddress = await getPublicIpAddress();
-
-    const success = await postAutojiniVisitData({
-      requestType: "page_visit",
-      visitedAt: new Date().toISOString(),
-      customerName: "",
-      ipAddress,
-      referrerDomain: getReferrerDomain(referrer),
-      referrerUrl: referrer || "직접 접속",
-      visitorId: getAutojiniVisitorId(),
-      visitSessionId: autojiniVisitSessionId,
-      deviceType: getDeviceType(),
-      browserName: getBrowserName()
-    });
-
-    if (success) {
-      try {
-        sessionStorage.setItem(AUTOJINI_VISIT_LOGGED_KEY, "true");
-      } catch (error) {
-        console.warn("방문 로그 저장 여부를 기록하지 못했습니다.", error);
-      }
-    }
-
-    return success;
+    // 방문로그 전송 비활성화
+    return false;
   }
 
   function resumeAutojiniVisitTime() {
@@ -5972,12 +5939,11 @@ const vehicleCatalog = [
     { passive: true }
   );
 
-  // 방문로그 추적 일시 비활성화
-  // window.addEventListener(
-  //   "load",
-  //   initializeAutojiniVisitTracking,
-  //   { once: true }
-  // );
+//   window.addEventListener(
+//     "load",
+//     initializeAutojiniVisitTracking,
+//     { once: true }
+//   );
 
   const trims = ["전체 모델", "2.5 가솔린", "3.5 가솔린", "3.5 가솔린 AWD"];
   const rateOptions = ["10%", "20%", "30%", "40%"];
