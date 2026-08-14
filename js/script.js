@@ -5972,11 +5972,12 @@ const vehicleCatalog = [
     { passive: true }
   );
 
-  window.addEventListener(
-    "load",
-    initializeAutojiniVisitTracking,
-    { once: true }
-  );
+  // 방문로그 추적 일시 비활성화
+  // window.addEventListener(
+  //   "load",
+  //   initializeAutojiniVisitTracking,
+  //   { once: true }
+  // );
 
   const trims = ["전체 모델", "2.5 가솔린", "3.5 가솔린", "3.5 가솔린 AWD"];
   const rateOptions = ["10%", "20%", "30%", "40%"];
